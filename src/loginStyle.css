@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+}
+
+.d-flex {
+    margin: 20px;
+    display: flex;
+}
+
+.d-flex section {
+    flex: 1;
+    height: calc(100vh - 40px);
+    min-height: 600px;
+}
+
+.login-page-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e1dffc;
+    border-radius: 5px 0 0 5px;
+}
+
+.login-page-img-container {
+    background-color: white;
+    max-width: 900px;
+    border-radius: 50%;
+    width: 100%;
+    padding: 30px;
+    clip-path: circle();
+}
+
+img {
+    width: 100%;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    margin: 40px 0;
+    width: 200px;
+}
+
+.modernLabel {
+    border: 1px solid #c0c0c0;
+    margin: 30px 0;
+    width: 400px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.modernLabel-input {
+    border-radius: 5px;
+    padding: 20px;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    font-size: 24px;
+}
+
+.modernLabel-input:focus {
+    outline: none;
+}
+
+.modernLabel-label {
+    position: absolute;
+    left: 0;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 24px;
+    background-color: white;
+    z-index: -1;
+    transition: ease-out 0.2s;
+    font-weight: 700;
+}
+
+.modernLabel-input:not(:placeholder-shown) + label,
+.modernLabel-input:focus + label {
+    color: #b000f0;
+    padding: 0 2px;
+    font-size: 0.8em;
+    transform: translate(0px, -2.2em);
+    z-index: 10;
+}
+
+.submit-btn {
+    background-color: #b000f0;
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 800px) {
+    .login-page-img {
+        display: none;
+    }
+}
