@@ -17,6 +17,7 @@ const FormTextItem = React.forwardRef(
         ref
     ) => {
         // const [inputValue, setInputValue] = React.useState("");
+        const [passwordShow, setPasswordShow] = React.useState(false);
 
         const handleChange = (e) => {
             // console.log(e.target.value);
@@ -32,10 +33,12 @@ const FormTextItem = React.forwardRef(
             >
                 <span className="error-text">{errorText}</span>
                 <input
-                    type={type}
+                    type={passwordShow ? "text" : type}
                     name={name}
                     placeholder={placeholder}
-                    className={isModernLabel ? "modernLabel-input" : undefined}
+                    className={`${isModernLabel && "modernLabel-input"} ${
+                        type == "password" && "password-input"
+                    }`}
                     value={value}
                     onChange={handleChange}
                     ref={ref}
@@ -46,9 +49,19 @@ const FormTextItem = React.forwardRef(
                 >
                     {label}
                 </label>
-                <button className="password-show-hide">
-                    <FaRegEye />
-                </button>
+                {type === "password" && (
+                    <button
+                        className="password-show-hide"
+                        type="button"
+                        onClick={() => setPasswordShow((prev) => !prev)}
+                    >
+                        {passwordShow ? (
+                            <FaRegEyeSlash size={18} />
+                        ) : (
+                            <FaRegEye size={18} />
+                        )}
+                    </button>
+                )}
             </div>
         );
     }

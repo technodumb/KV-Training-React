@@ -84,8 +84,16 @@
     transform: translateY(100%);
 }
 
+.password-input {
+    padding-right: 50px;
+}
+
 .password-show-hide {
     position: absolute;
     right: 0;
     margin: 24px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }

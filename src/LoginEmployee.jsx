@@ -16,7 +16,9 @@ const LoginEmployee = ({ handleSubmit }) => {
     const usernameRef = React.useRef();
 
     useEffect(() => {
-        usernameRef.current.focus();
+        const timeout = setTimeout(() => usernameRef.current.focus(), 1000);
+
+        return () => clearTimeout(timeout);
     }, []);
 
     return (
