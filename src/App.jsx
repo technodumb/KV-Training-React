@@ -1,20 +1,49 @@
 import "./style.css";
-// import TextField from "./components/TextField";
-import { useState } from "react";
-import CreateEmployee from "./CreateEmployee";
-import LoginEmployee from "./LoginEmployee";
-import "./components/components.css";
 
-const App = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const handleLogin = () => {
-    setLoggedIn(true);
-  };
-  return isLoggedIn ? (
-    <CreateEmployee />
-  ) : (
-    <LoginEmployee handleSubmit={handleLogin} />
-  );
-};
+import CreateEmployee from "./pages/CreateEmployee";
+import LoginEmployee from "./pages/LoginEmployee";
+import "./components/components.css";
+import {
+    createBrowserRouter,
+    redirect,
+    RouterProvider,
+} from "react-router-dom";
+import NotFound from "./components/NotFound";
+import EmployeeLayout from "./layouts/EmployeeLayout";
+import ListEmployee from "./pages/ListEmployee";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        errorElement: <NotFound />,
+        children: [
+            {
+                index: true,
+                element: <LoginEmployee />,
+            },
+            {
+                path: "employee",
+                element: <EmployeeLayout />,
+
+                children: [
+                    {
+                        index: true,
+                        loader: async () => redirect("list"),
+                    },
+                    {
+                        path: "create",
+                        element: <CreateEmployee />,
+                    },
+                    {
+                        path: "list",
+                        element: <ListEmployee />,
+                    },
+                ],
+            },
+        ],
+    },
+]);
+
+const App = () => <RouterProvider router={router} />;
 
 export default App;

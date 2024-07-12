@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 
-import login from "./assets/kvLogin.jpeg";
-import logo from "./assets/kvLogo.png";
-import Button from "./components/Button";
-import FormTextItem from "./components/FormTextItem";
+import login from "../assets/kvLogin.jpeg";
+import logo from "../assets/kvLogo.png";
+import Button from "../components/Button";
+import FormTextItem from "../components/FormTextItem";
 import "./loginStyle.css";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-const LoginEmployee = ({ handleSubmit }) => {
+const LoginEmployee = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = React.useState({
         username: "",
         password: "",
@@ -20,6 +22,18 @@ const LoginEmployee = ({ handleSubmit }) => {
 
         return () => clearTimeout(timeout);
     }, []);
+
+    const handleSubmit = () => {
+        if (
+            formData.username === "alnaskabeer" &&
+            formData.password === "abc123"
+        ) {
+            localStorage.setItem("token", "true");
+        } else {
+            localStorage.setItem("token", "false");
+        }
+        navigate("/employee");
+    };
 
     return (
         <div className="d-flex">
@@ -41,12 +55,12 @@ const LoginEmployee = ({ handleSubmit }) => {
                         label="Username"
                         isModernLabel={true}
                         changeState={(username) => {
-                            if (username.length <= 10)
+                            if (username.length <= 15)
                                 setFormData({ ...formData, username });
                         }}
                         errorText={
-                            formData.username.length >= 10
-                                ? "Username can have a max of 10 letters"
+                            formData.username.length >= 15
+                                ? "Username can have a max of 15 letters"
                                 : undefined
                         }
                         value={formData.username}
@@ -63,7 +77,7 @@ const LoginEmployee = ({ handleSubmit }) => {
                     />
 
                     <Button
-                        type="submit"
+                        type="button"
                         onClick={handleSubmit}
                         isPrimary={true}
                     >

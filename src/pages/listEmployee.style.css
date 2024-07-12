@@ -1,0 +1,134 @@
+.listEmployee-heading {
+    display: flex;
+    align-items: center;
+}
+
+.listEmployee-heading h1 {
+    flex: 1;
+}
+
+.employee-filter {
+    text-wrap: nowrap;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.employee-filter-select {
+    margin: 0;
+    vertical-align: middle;
+    padding: 5px;
+    font-size: 14px;
+    width: 120px;
+    background-color: #eaf9ff;
+    border: none;
+    border-radius: 20px;
+    appearance: none;
+}
+
+.employee-filter-select option {
+    text-align: center;
+}
+
+.employee-filter-clear {
+    color: red;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.employee-create {
+    margin: 0 20px;
+    text-decoration: none;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
+
+.employee-create-plus {
+    height: 50px;
+    width: 50px;
+    min-height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    background-color: #03aeed;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    margin-right: -20px;
+    z-index: 1;
+}
+
+.employee-create-text {
+    height: 30px;
+    padding: 10px 30px;
+    border-radius: 0 30px 30px 0;
+
+    /* width: ; */
+    text-wrap: nowrap;
+    box-sizing: content-box;
+    background-color: #eaf9ff;
+    line-height: 30px;
+    color: black;
+}
+
+.employeeList-table {
+    width: 100%;
+    padding: 0 20px;
+    /* margin: 20px 0; */
+}
+
+.employeeList-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.employeeList-tableHeading {
+    margin: 0 0 20px 0;
+    background-color: #eaf9ff;
+}
+
+.employeeList-tableData {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px #c5c3c3;
+}
+
+.employeeList-row {
+    text-align: left;
+}
+
+.table-row-action {
+    display: flex;
+    gap: 30px;
+    /* justify-content: center; */
+}
+
+.table-row-action .icon {
+    cursor: pointer;
+}
+
+.statusPill {
+    width: 100px;
+    padding: 5px;
+    border-radius: 20px;
+    text-align: center !important;
+    font-weight: 600;
+    color: #03aeed;
+}
+
+.statusPillProbation {
+    background-color: #f5ecb8;
+}
+
+.statusPillActive {
+    background-color: #d3f4be;
+}
+
+.statusPillInactive {
+    background-color: #ffbfbf;
+}
