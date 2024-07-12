@@ -1,0 +1,26 @@
+.detailsEmployee-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.employee-details-pencil {
+    height: 50px;
+    width: 50px;
+    min-height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    background-color: #03aeed;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: -20px;
+    z-index: 1;
+}
+
+.detailsEmployee-details {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+}

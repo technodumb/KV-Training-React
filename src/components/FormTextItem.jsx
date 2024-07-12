@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
+import "./components.css";
 
 // eslint-disable-next-line react/display-name
 const FormTextItem = React.forwardRef(
@@ -13,6 +14,7 @@ const FormTextItem = React.forwardRef(
             isModernLabel = false,
             errorText,
             value,
+            disabled,
         },
         ref
     ) => {
@@ -26,22 +28,27 @@ const FormTextItem = React.forwardRef(
 
         return (
             <div
-                className={
-                    (isModernLabel ? "modernLabel " : "form-item ") +
-                    (errorText ? "form-item-error" : "")
-                }
+                className={`${isModernLabel ? "modernLabel " : "form-item "} ${
+                    errorText ? "form-item-error" : ""
+                } ${disabled == "hidden" ? "hidden" : ""} ${
+                    errorText ? "form-item-error" : ""
+                }`}
             >
                 <span className="error-text">{errorText}</span>
                 <input
                     type={passwordShow ? "text" : type}
                     name={name}
                     placeholder={placeholder}
-                    className={`${isModernLabel && "modernLabel-input"} ${
+                    className={`${
+                        disabled ? "disabled-input" : ""
+                    } form-text-item ${isModernLabel && "modernLabel-input"} ${
                         type == "password" && "password-input"
                     }`}
                     value={value}
                     onChange={handleChange}
                     ref={ref}
+                    disabled={disabled}
+                    required
                 />
                 <label
                     htmlFor={name}

@@ -13,7 +13,6 @@ const LoginEmployee = () => {
         username: "",
         password: "",
     });
-    console.log(formData);
 
     const usernameRef = React.useRef();
 

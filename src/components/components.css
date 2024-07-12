@@ -85,6 +85,10 @@
     transform: translateY(100%);
 }
 
+.disabled-input {
+    background-color: #47474759 !important;
+}
+
 .password-input {
     padding-right: 50px;
 }
@@ -130,4 +134,33 @@
 
 .error-desc {
     font-size: 32px;
+}
+
+.form-text-item {
+}
+
+.hidden {
+    display: none !important;
+}
+
+.employee-detail-unit {
+    display: flex;
+    flex-direction: column;
+    line-height: 28px;
+    padding: 20px;
+}
+
+.employee-detail-unit-emp_addr {
+    grid-column: 1 / span 2;
+    border-top: 1px solid #bc7f7f;
+}
+
+.employee-detail-unit-emp_id {
+    border-top: 1px solid #bc7f7f;
+    grid-column: 3 / span 4;
+}
+
+.employee-detail-unit-title {
+    color: #5f8897;
+    font-weight: 700;
 }

@@ -1,12 +1,20 @@
 import React from "react";
 
-const FormSelectItem = ({ name, label, placeholder, options, changeState }) => {
+const FormSelectItem = ({
+    name,
+    label,
+    placeholder,
+    options,
+    changeState,
+    value,
+}) => {
     // console.log(options);
     return (
         <div className="form-item">
             <select
                 name={name}
                 onChange={(e) => changeState(e.currentTarget.value)}
+                value={value}
             >
                 <option value="" className="option-placeholder" hidden>
                     {placeholder}

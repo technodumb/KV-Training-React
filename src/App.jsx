@@ -11,6 +11,8 @@ import {
 import NotFound from "./components/NotFound";
 import EmployeeLayout from "./layouts/EmployeeLayout";
 import ListEmployee from "./pages/ListEmployee";
+import EditEmployee from "./pages/EditEmployee";
+import DetailsEmployee from "./pages/DetailsEmployee";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +40,11 @@ const router = createBrowserRouter([
                         path: "list",
                         element: <ListEmployee />,
                     },
+                    {
+                        path: "edit/:emp_id",
+                        element: <EditEmployee />,
+                    },
+                    { path: "details/:emp_id", element: <DetailsEmployee /> },
                 ],
             },
         ],

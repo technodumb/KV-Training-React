@@ -4,11 +4,17 @@ import FormTextItem from "../components/FormTextItem";
 import "./createEmployee.style.css";
 import FormSelectItem from "../components/FormSelectItem";
 import Button from "../components/Button";
-import { useNavigate, useOutlet, useOutletContext } from "react-router-dom";
+import {
+    useNavigate,
+    useOutlet,
+    useOutletContext,
+    useParams,
+} from "react-router-dom";
 import FormComponent from "../components/FormComponent";
 
-const CreateEmployee = () => {
+const EditEmployee = () => {
     const [employeeList, setEmployeeList] = useOutletContext();
+    const { emp_id } = useParams();
 
     return (
         <div className="main-body">
@@ -16,15 +22,16 @@ const CreateEmployee = () => {
                 className="employee-section heading"
                 style={{ textAlign: "left" }}
             >
-                <h1>Create Employee</h1>
+                <h1>Edit Employee</h1>
             </section>
 
             <FormComponent
                 employeeList={employeeList}
                 setEmployeeList={setEmployeeList}
+                emp_id={emp_id}
             />
         </div>
     );
 };
 
-export default CreateEmployee;
+export default EditEmployee;
