@@ -5,6 +5,7 @@ import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
 import StatusPill from "../components/StatusPill";
 import EmployeeDetailUnit from "../components/EmployeeDetailUnit";
 import EmployeeListRow from "../components/EmployeeListRow";
+import DeleteEmployeeModal from "../modals/deleteEmployeeModal";
 
 const ListEmployee = () => {
     const [filter, setFilter] = useState("");
@@ -39,9 +40,15 @@ const ListEmployee = () => {
                     Filter By
                     <select className="employee-filter-select">
                         <option hidden>Status</option>
-                        <option>Probation</option>
-                        <option>Active</option>
-                        <option>Inactive</option>
+                        <option>
+                            <StatusPill status="Probation" />
+                        </option>
+                        <option>
+                            <StatusPill status="Active" />
+                        </option>
+                        <option>
+                            <StatusPill status="Inactive" />
+                        </option>
                     </select>
                     {/* <span
                         className="employee-filter-clear"
@@ -60,19 +67,19 @@ const ListEmployee = () => {
             </section>
 
             <section className="employeeList">
-                <table className="employeeList-table">
-                    <thead>
-                        <tr className="employeeList-row employeeList-tableHeading">
-                            <th>Employee Name</th>
-                            <th>Employee ID</th>
-                            <th>Joining Date</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Experience</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className="employeeList-tableBody">
+                <div className="employeeList-table">
+                    {/* <thead> */}
+                    <div className="employeeList-row employeeList-tableHeading">
+                        <span>Employee Name</span>
+                        <span>Employee ID</span>
+                        <span>Joining Date</span>
+                        <span>Role</span>
+                        <span>Status</span>
+                        <span>Experience</span>
+                        <span>Action</span>
+                    </div>
+                    {/* </thead> */}
+                    <div className="employeeList-tableBody">
                         {Object.keys(employeeList).map((emp_id) => {
                             const employee = employeeList[emp_id];
                             if (employee.deleted) return;
@@ -86,8 +93,8 @@ const ListEmployee = () => {
                                 />
                             );
                         })}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </section>
         </div>
     );

@@ -1,6 +1,7 @@
 .listEmployee-heading {
     display: flex;
     align-items: center;
+    min-width: fit-content;
 }
 
 .listEmployee-heading h1 {
@@ -80,16 +81,17 @@
 
 .employeeList-table {
     width: 100%;
+
+    height: calc(100vh - 300px);
     padding: 0 20px;
-    /* margin: 20px 0; */
-    height: 200px;
+    /* height: 100%; */
 }
 
 .employeeList-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     align-items: center;
-    padding: 20px;
+    padding: 15px 20px;
     margin: 10px 0;
     text-align: left;
 }
@@ -100,8 +102,9 @@ a {
 }
 
 .employeeList-tableHeading {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     background-color: #eaf9ff;
+    font-weight: 700;
 }
 
 .employeeList-tableData {
@@ -111,17 +114,32 @@ a {
 }
 
 .employeeList-tableBody {
+    /* flex: 1; */
+    overflow: auto;
+    height: 100%;
 }
 
 .table-row-action {
     display: flex;
     gap: 30px;
     z-index: 2;
-    /* justify-content: center; */
 }
 
 .table-row-action .icon {
     cursor: pointer;
+}
+
+.table-row-action-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-row-action-button:hover {
+    background-color: #03afed3f;
 }
 
 .statusPill {
@@ -146,4 +164,51 @@ a {
 
 .statusPillInactive {
     background-color: #ffbfbf;
+}
+
+.delete-employee-modal-background {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-employee-modal {
+    position: relative;
+    box-sizing: border-box;
+    padding: 40px 80px;
+    background-color: white;
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.delete-employee-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.delete-employee-modal-buttons {
+    display: flex;
+    /* justify-content: center; */
+    gap: 20px;
+    width: 200px;
+    height: 40px;
+}
+
+.delete-employee-modal-buttons button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    /* border: none; */
+    border-radius: 5px;
+    cursor: pointer;
 }
