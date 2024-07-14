@@ -1,3 +1,7 @@
+.listEmployee-main-body {
+    overflow: hidden;
+}
+
 .listEmployee-heading {
     display: flex;
     align-items: center;
@@ -90,10 +94,12 @@
 .employeeList-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 20px;
     align-items: center;
     padding: 15px 20px;
     margin: 10px 0;
     text-align: left;
+    text-wrap: nowrap;
 }
 
 a {

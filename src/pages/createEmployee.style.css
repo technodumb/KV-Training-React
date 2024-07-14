@@ -101,7 +101,7 @@ body {
 .main-body {
     padding: 10px;
     width: calc(100vw - 300px);
-    /* overflow: auto; */
+    overflow: auto;
     min-width: 500px;
 }
 

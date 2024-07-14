@@ -33,22 +33,16 @@ const ListEmployee = () => {
     // ];
 
     return (
-        <div className="main-body">
+        <div className="main-body listEmployee-main-body">
             <section className="employee-section listEmployee-heading ">
                 <h1>Employee list</h1>
                 <div className="employee-filter">
                     Filter By
                     <select className="employee-filter-select">
                         <option hidden>Status</option>
-                        <option>
-                            <StatusPill status="Probation" />
-                        </option>
-                        <option>
-                            <StatusPill status="Active" />
-                        </option>
-                        <option>
-                            <StatusPill status="Inactive" />
-                        </option>
+                        <option>Probation</option>
+                        <option>Active </option>
+                        <option>Inactive </option>
                     </select>
                     {/* <span
                         className="employee-filter-clear"
