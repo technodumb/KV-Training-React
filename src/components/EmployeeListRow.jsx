@@ -3,13 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import StatusPill from "./StatusPill";
 import { FaPencil, FaRegTrashCan } from "react-icons/fa6";
 import DeleteEmployeeModal from "../modals/deleteEmployeeModal";
+import { actionTypes } from "../store/useReducer";
 
-const EmployeeListRow = ({
-    emp_id,
-    employee,
-    setEmployeeList,
-    employeeList,
-}) => {
+const EmployeeListRow = ({ emp_id, employee, state, dispatch }) => {
     const employeePropertyOrder = [
         "emp_name",
         "emp_id",
@@ -66,15 +62,14 @@ const EmployeeListRow = ({
             </Link>
             {userDelete ? (
                 <DeleteEmployeeModal
-                    deleteEmployee={() =>
-                        setEmployeeList({
-                            ...employeeList,
-                            [emp_id]: {
-                                ...employee,
-                                deleted: true,
-                            },
-                        })
-                    }
+                    deleteEmployee={() => {
+                        console.log("hello");
+                        console.log(emp_id);
+                        dispatch({
+                            type: actionTypes.DELETE_EMPLOYEE,
+                            payload: emp_id,
+                        });
+                    }}
                     cancel={() => setUserDelete(false)}
                 />
             ) : (

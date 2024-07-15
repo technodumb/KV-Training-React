@@ -6,9 +6,18 @@ import StatusPill from "../components/StatusPill";
 import EmployeeDetailUnit from "../components/EmployeeDetailUnit";
 
 const DetailsEmployee = () => {
-    const [employeeList, setEmployeeList] = useOutletContext();
+    const { state } = useOutletContext();
+
     const { emp_id } = useParams();
-    const employee = employeeList[emp_id];
+    // const employee = employeeList[emp_id];
+    const employee = state.employees.find((employee) => {
+        console.log(emp_id);
+        console.log(employee.emp_id);
+        console.log(employee);
+        return employee.emp_id === emp_id;
+    });
+    console.log(employee);
+
     const employeeDetailProps = [
         { name: "emp_name", title: "Employee Name" },
         { name: "emp_join", title: "Joining Date" },

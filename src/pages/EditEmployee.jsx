@@ -1,20 +1,10 @@
-import { useState, useRef, useEffect } from "react";
-
-import FormTextItem from "../components/FormTextItem";
 import "./createEmployee.style.css";
-import FormSelectItem from "../components/FormSelectItem";
-import Button from "../components/Button";
-import {
-    useNavigate,
-    useOutlet,
-    useOutletContext,
-    useParams,
-} from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import FormComponent from "../components/FormComponent";
 
 const EditEmployee = () => {
-    const [employeeList, setEmployeeList] = useOutletContext();
     const { emp_id } = useParams();
+    const { state, dispatch } = useOutletContext();
 
     return (
         <div className="main-body">
@@ -25,11 +15,7 @@ const EditEmployee = () => {
                 <h1>Edit Employee</h1>
             </section>
 
-            <FormComponent
-                employeeList={employeeList}
-                setEmployeeList={setEmployeeList}
-                emp_id={emp_id}
-            />
+            <FormComponent state={state} dispatch={dispatch} emp_id={emp_id} />
         </div>
     );
 };

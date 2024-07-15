@@ -93,13 +93,13 @@
 
 .employeeList-row {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr;
+
     grid-column-gap: 20px;
     align-items: center;
     padding: 15px 20px;
     margin: 10px 0;
     text-align: left;
-    text-wrap: nowrap;
 }
 
 a {
@@ -117,6 +117,18 @@ a {
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 2px 5px #c5c3c3;
+}
+
+.employeeList-tableData:hover {
+    background-color: #03ed171f;
+}
+
+.employeeList-row span {
+    text-overflow: ellipsis;
+    /* max-lines: 1; */
+    text-wrap: nowrap;
+    overflow: hidden;
+    /* white-space: nowrap; */
 }
 
 .employeeList-tableBody {
@@ -149,6 +161,7 @@ a {
 }
 
 .statusPill {
+    display: block;
     width: 100px;
     /* padding: 5px; */
     height: 30px;

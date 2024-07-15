@@ -8,8 +8,7 @@ import { useNavigate, useOutlet, useOutletContext } from "react-router-dom";
 import FormComponent from "../components/FormComponent";
 
 const CreateEmployee = () => {
-    const [employeeList, setEmployeeList] = useOutletContext();
-
+    const { state, dispatch } = useOutletContext();
     return (
         <div className="main-body">
             <section
@@ -19,10 +18,7 @@ const CreateEmployee = () => {
                 <h1>Create Employee</h1>
             </section>
 
-            <FormComponent
-                employeeList={employeeList}
-                setEmployeeList={setEmployeeList}
-            />
+            <FormComponent state={state} dispatch={dispatch} />
         </div>
     );
 };

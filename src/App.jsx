@@ -14,43 +14,47 @@ import ListEmployee from "./pages/ListEmployee";
 import EditEmployee from "./pages/EditEmployee";
 import DetailsEmployee from "./pages/DetailsEmployee";
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        errorElement: <NotFound />,
-        children: [
-            {
-                index: true,
-                element: <LoginEmployee />,
-            },
-            {
-                path: "employee",
-                element: <EmployeeLayout />,
+const App = () => {
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            errorElement: <NotFound />,
+            children: [
+                {
+                    index: true,
+                    element: <LoginEmployee />,
+                },
+                {
+                    path: "employee",
+                    element: <EmployeeLayout />,
 
-                children: [
-                    {
-                        index: true,
-                        loader: async () => redirect("list"),
-                    },
-                    {
-                        path: "create",
-                        element: <CreateEmployee />,
-                    },
-                    {
-                        path: "list",
-                        element: <ListEmployee />,
-                    },
-                    {
-                        path: "edit/:emp_id",
-                        element: <EditEmployee />,
-                    },
-                    { path: "details/:emp_id", element: <DetailsEmployee /> },
-                ],
-            },
-        ],
-    },
-]);
-
-const App = () => <RouterProvider router={router} />;
+                    children: [
+                        {
+                            index: true,
+                            loader: async () => redirect("list"),
+                        },
+                        {
+                            path: "create",
+                            element: <CreateEmployee />,
+                        },
+                        {
+                            path: "list",
+                            element: <ListEmployee />,
+                        },
+                        {
+                            path: "edit/:emp_id",
+                            element: <EditEmployee />,
+                        },
+                        {
+                            path: "details/:emp_id",
+                            element: <DetailsEmployee />,
+                        },
+                    ],
+                },
+            ],
+        },
+    ]);
+    return <RouterProvider router={router} />;
+};
 
 export default App;

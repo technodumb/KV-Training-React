@@ -3,8 +3,12 @@ import Button from "./Button";
 import FormSelectItem from "./FormSelectItem";
 import FormTextItem from "./FormTextItem";
 import { useNavigate } from "react-router-dom";
+import { actionTypes } from "../store/useReducer";
+import { v4 as uuidv4 } from "uuid";
 
-const FormComponent = ({ setEmployeeList, employeeList, emp_id }) => {
+const FormComponent = ({ state, dispatch, emp_id }) => {
+    const employees = state.employees;
+    // const emp = [];
     const fieldProps = [
         {
             label: "Employee Name",
@@ -55,7 +59,7 @@ const FormComponent = ({ setEmployeeList, employeeList, emp_id }) => {
 
     const [formData, setFormData] = useState({
         emp_name: "",
-        emp_id: Object.keys(employeeList).length + 1,
+        emp_id: uuidv4(),
         emp_join: "",
         emp_role: "",
         emp_status: "",
@@ -67,9 +71,13 @@ const FormComponent = ({ setEmployeeList, employeeList, emp_id }) => {
 
     useEffect(() => {
         if (emp_id) {
-            setFormData(employeeList[emp_id]);
+            // setFormData(state);
+            const employee = employees.find(
+                (employee) => employee.emp_id === emp_id
+            );
+            setFormData(employee);
         }
-    }, [emp_id, employeeList]);
+    }, [emp_id, employees]);
 
     const changeFormState = (formField, formFieldValue) => {
         setFormData({ ...formData, [formField]: formFieldValue });
@@ -83,19 +91,23 @@ const FormComponent = ({ setEmployeeList, employeeList, emp_id }) => {
     }, [formData]);
 
     const handleOnSubmit = (e) => {
-        // e.preventDefault();
-        setEmployeeList({ ...employeeList, [formData.emp_id]: formData });
+        if (emp_id) {
+            dispatch({
+                type: actionTypes.UPDATE_EMPLOYEE,
+                payload: { formData, emp_id },
+            });
+        } else {
+            dispatch({
+                type: actionTypes.ADD_EMPLOYEE,
+                payload: formData,
+            });
+        }
         navigate(-1);
     };
 
     return (
         <section className="employee-section">
-            <form
-                action="#"
-                method="post"
-                className="form-container"
-                onSubmit={() => {}}
-            >
+            <form className="form-container">
                 <div className="form-item-container">
                     {fieldProps.map((fieldProp) => {
                         {
@@ -145,7 +157,7 @@ const FormComponent = ({ setEmployeeList, employeeList, emp_id }) => {
                     <Button
                         isPrimary={true}
                         onClick={handleOnSubmit}
-                        type="submit"
+                        type="button"
                     >
                         {emp_id ? "Update" : "Create"}
                     </Button>
