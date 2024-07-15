@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import StatusPill from "./StatusPill";
 import { FaPencil, FaRegTrashCan } from "react-icons/fa6";
 import DeleteEmployeeModal from "../modals/deleteEmployeeModal";
@@ -21,9 +21,7 @@ const EmployeeListRow = ({
 
     const [userDelete, setUserDelete] = useState(false);
 
-    useEffect(() => {
-        console.log(userDelete);
-    }, [userDelete]);
+    const navigate = useNavigate();
     return (
         <>
             <Link to={"../details/" + emp_id}>
@@ -42,18 +40,27 @@ const EmployeeListRow = ({
                         );
                     })}
                     <span className="table-row-action">
-                        <Link
+                        <span
                             className="table-row-action-button"
-                            onClick={() => setUserDelete(true)}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setUserDelete(true);
+                            }}
                         >
                             <FaRegTrashCan color="red" className="icon" />
-                        </Link>
-                        <Link
+                        </span>
+                        <span
                             className="table-row-action-button"
-                            to={"../edit/" + emp_id}
+                            // to={"../edit/" + emp_id}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                navigate("../edit/" + emp_id);
+                            }}
                         >
                             <FaPencil color="#03aeed" className="icon" />
-                        </Link>
+                        </span>
                     </span>
                 </div>
             </Link>
