@@ -117,6 +117,7 @@ a {
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 2px 5px #c5c3c3;
+    transition: ease-in-out 0.2s;
 }
 
 .employeeList-tableData:hover {
@@ -135,6 +136,10 @@ a {
     /* flex: 1; */
     overflow: auto;
     height: 100%;
+}
+
+.employeeList-tableBody::-webkit-scrollbar {
+    display: none;
 }
 
 .table-row-action {

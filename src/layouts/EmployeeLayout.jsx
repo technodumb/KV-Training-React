@@ -1,17 +1,11 @@
 import logo from "../assets/kvLogo.png";
 import { Outlet, useNavigate } from "react-router-dom";
 import NavElement from "../components/NavElement";
-import { useEffect, useReducer } from "react";
-import reducer from "../store/useReducer";
-import employeeList from "../store/dummyData";
+import { useEffect } from "react";
 
 const EmployeeLayout = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
-    const [state, dispatch] = useReducer(reducer, {
-        employees: employeeList,
-        statusFilter: "",
-    });
 
     useEffect(() => {
         if (!token || token !== "true") {
@@ -40,7 +34,7 @@ const EmployeeLayout = () => {
                         />
                     </nav>
                 </aside>
-                <Outlet context={{ state, dispatch }} />
+                <Outlet />
             </main>
         </div>
     );

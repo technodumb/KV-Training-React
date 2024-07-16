@@ -1,13 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import FormSelectItem from "./FormSelectItem";
 import FormTextItem from "./FormTextItem";
 import { useNavigate } from "react-router-dom";
-import { actionTypes } from "../store/useReducer";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { addEmployee, updateEmployee } from "../store/employeeReducer";
+import { useSelector } from "react-redux";
 
-const FormComponent = ({ state, dispatch, emp_id }) => {
-    const employees = state.employees;
+const FormComponent = ({ emp_id }) => {
+    const employees = useSelector((state) => state.employees.employees);
+    const dispatch = useDispatch();
     // const emp = [];
     const fieldProps = [
         {
@@ -92,15 +95,9 @@ const FormComponent = ({ state, dispatch, emp_id }) => {
 
     const handleOnSubmit = (e) => {
         if (emp_id) {
-            dispatch({
-                type: actionTypes.UPDATE_EMPLOYEE,
-                payload: { formData, emp_id },
-            });
+            dispatch(updateEmployee({ updatedEmployee: formData }));
         } else {
-            dispatch({
-                type: actionTypes.ADD_EMPLOYEE,
-                payload: formData,
-            });
+            dispatch(addEmployee({ newEmployee: formData }));
         }
         navigate(-1);
     };

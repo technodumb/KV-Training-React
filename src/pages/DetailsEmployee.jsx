@@ -1,16 +1,14 @@
-import { useState } from "react";
 import "./detailsEmployee.style.css";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
-import StatusPill from "../components/StatusPill";
 import EmployeeDetailUnit from "../components/EmployeeDetailUnit";
+import { useSelector } from "react-redux";
 
 const DetailsEmployee = () => {
-    const { state } = useOutletContext();
-
     const { emp_id } = useParams();
     // const employee = employeeList[emp_id];
-    const employee = state.employees.find((employee) => {
+    const employees = useSelector((state) => state.employees.employees);
+    const employee = employees.find((employee) => {
         console.log(emp_id);
         console.log(employee.emp_id);
         console.log(employee);

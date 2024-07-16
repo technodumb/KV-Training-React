@@ -5,7 +5,7 @@ import logo from "../assets/kvLogo.png";
 import Button from "../components/Button";
 import FormTextItem from "../components/FormTextItem";
 import "./loginStyle.css";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginEmployee = () => {
     const navigate = useNavigate();

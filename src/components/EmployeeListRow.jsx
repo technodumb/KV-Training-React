@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StatusPill from "./StatusPill";
 import { FaPencil, FaRegTrashCan } from "react-icons/fa6";
 import DeleteEmployeeModal from "../modals/deleteEmployeeModal";
-import { actionTypes } from "../store/useReducer";
+import { useDispatch } from "react-redux";
+import { deleteEmployee } from "../store/employeeReducer";
 
-const EmployeeListRow = ({ emp_id, employee, state, dispatch }) => {
+const EmployeeListRow = ({ emp_id, employee }) => {
     const employeePropertyOrder = [
         "emp_name",
         "emp_id",
@@ -16,6 +17,7 @@ const EmployeeListRow = ({ emp_id, employee, state, dispatch }) => {
     ];
 
     const [userDelete, setUserDelete] = useState(false);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
     return (
@@ -65,10 +67,11 @@ const EmployeeListRow = ({ emp_id, employee, state, dispatch }) => {
                     deleteEmployee={() => {
                         console.log("hello");
                         console.log(emp_id);
-                        dispatch({
-                            type: actionTypes.DELETE_EMPLOYEE,
-                            payload: emp_id,
-                        });
+                        // dispatch({
+                        //     type: actionTypes.DELETE_EMPLOYEE,
+                        //     payload: emp_id,
+                        // });
+                        dispatch(deleteEmployee({ emp_id: emp_id }));
                     }}
                     cancel={() => setUserDelete(false)}
                 />

@@ -1,17 +1,26 @@
 import "./listEmployee.style.css";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import EmployeeListRow from "../components/EmployeeListRow";
-import { actionTypes } from "../store/useReducer";
+import { useDispatch } from "react-redux";
+import { changeStatusFilter } from "../store/employeeReducer";
+import { useSelector } from "react-redux";
 
 const ListEmployee = () => {
     // const [filter, setFilter] = useState("");
-    const { state, dispatch } = useOutletContext();
-    const handleChangeFilter = (e) => {
-        dispatch({
-            type: actionTypes.CHANGE_FILTER,
-            payload: e.target.value == "Status" ? "" : e.target.value,
-        });
+    const dispatch = useDispatch();
+    const handleChangeStatusFilter = (e) => {
+        // dispatch({
+        //     type: actionTypes.CHANGE_FILTER,
+        //     payload: e.target.value == "Status" ? "" : e.target.value,
+        // });
+        dispatch(
+            changeStatusFilter({
+                statusFilter: e.target.value == "Status" ? "" : e.target.value,
+            })
+        );
     };
+    const employees = useSelector((state) => state.employees.employees);
+    const statusFilter = useSelector((state) => state.employees.statusFilter);
     return (
         <div className="main-body listEmployee-main-body">
             <section className="employee-section listEmployee-heading ">
@@ -20,7 +29,7 @@ const ListEmployee = () => {
                     Filter By
                     <select
                         className="employee-filter-select"
-                        onChange={handleChangeFilter}
+                        onChange={handleChangeStatusFilter}
                     >
                         <option>Status</option>
                         <option>Probation</option>
@@ -57,21 +66,18 @@ const ListEmployee = () => {
                     </div>
                     {/* </thead> */}
                     <div className="employeeList-tableBody">
-                        {state.employees.map((employee) => {
+                        {employees.map((employee) => {
                             if (
-                                state.statusFilter != "" &&
-                                employee.emp_status != state.statusFilter
-                            ) {
-                                console.log(state);
+                                statusFilter != "" &&
+                                employee.emp_status != statusFilter
+                            )
                                 return;
-                            }
+
                             return (
                                 <EmployeeListRow
                                     key={employee.emp_id}
                                     emp_id={employee.emp_id}
                                     employee={employee}
-                                    state={state}
-                                    dispatch={dispatch}
                                 />
                             );
                         })}
