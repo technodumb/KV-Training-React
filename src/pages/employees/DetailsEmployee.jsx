@@ -1,20 +1,32 @@
 import "./detailsEmployee.style.css";
 import { Link, useParams } from "react-router-dom";
 import { FaPencil } from "react-icons/fa6";
-import EmployeeDetailUnit from "../components/EmployeeDetailUnit";
+import EmployeeDetailUnit from "../../components/EmployeeDetailUnit";
 import { useSelector } from "react-redux";
+import { useGetEmployeeDetailsQuery } from "./api";
+import { useEffect, useState } from "react";
+import { employeeAttributeMap } from "../../utils/employeeAttributeMap";
 
 const DetailsEmployee = () => {
     const { emp_id } = useParams();
+    const [employee, setEmployee] = useState({});
     // const employee = employeeList[emp_id];
-    const employees = useSelector((state) => state.employees.employees);
-    const employee = employees.find((employee) => {
-        console.log(emp_id);
-        console.log(employee.emp_id);
-        console.log(employee);
-        return employee.emp_id === emp_id;
-    });
-    console.log(employee);
+    // const employees = useSelector((state) => state.employees.employees);
+    // const employee = employees.find((employee) => {
+    //     console.log(emp_id);
+    //     console.log(employee.emp_id);
+    //     console.log(employee);
+    //     return employee.emp_id === emp_id;
+    // });
+    // console.log(employee);
+    const { data, isSuccess } = useGetEmployeeDetailsQuery(emp_id);
+
+    useEffect(() => {
+        if (isSuccess) {
+            console.log(data);
+            setEmployee(employeeAttributeMap(data));
+        }
+    }, [data, isSuccess]);
 
     const employeeDetailProps = [
         { name: "emp_name", title: "Employee Name" },

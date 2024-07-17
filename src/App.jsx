@@ -1,7 +1,7 @@
 import "./style.css";
 
-import CreateEmployee from "./pages/CreateEmployee";
-import LoginEmployee from "./pages/LoginEmployee";
+import CreateEmployee from "./pages/employees/CreateEmployee";
+import LoginEmployee from "./pages/login/LoginEmployee";
 import "./components/components.css";
 import {
     createBrowserRouter,
@@ -10,9 +10,9 @@ import {
 } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import EmployeeLayout from "./layouts/EmployeeLayout";
-import ListEmployee from "./pages/ListEmployee";
-import EditEmployee from "./pages/EditEmployee";
-import DetailsEmployee from "./pages/DetailsEmployee";
+import ListEmployee from "./pages/employees/ListEmployee";
+import EditEmployee from "./pages/employees/EditEmployee";
+import DetailsEmployee from "./pages/employees/DetailsEmployee";
 import { Provider } from "react-redux";
 import store from "./store/store";
 

@@ -4,10 +4,11 @@ import employeeList from "./dummyData";
 const addEmployee = createAction("ADD_EMPLOYEE");
 const deleteEmployee = createAction("DELETE_EMPLOYEE");
 const updateEmployee = createAction("UPDATE_EMPLOYEE");
+const setEmployee = createAction("SET_EMPLOYEE");
 const changeStatusFilter = createAction("CHANGE_FILTER");
 
 const employeeReducer = createReducer(
-    { employees: employeeList, statusFilter: "" },
+    { employees: [], statusFilter: "" },
     (builder) => {
         builder.addCase(addEmployee, (state, action) => {
             state.employees.push(action.payload.newEmployee);
@@ -29,6 +30,11 @@ const employeeReducer = createReducer(
             // const employee = state.employees.find((employee)=>employee.emp_id===action.payload.updatedEmployee.emp_id)
         });
 
+        builder.addCase(setEmployee, (state, action) => {
+            console.log(action.payload.employees);
+            state.employees = action.payload.employees;
+        });
+
         builder.addCase(changeStatusFilter, (state, action) => {
             state.statusFilter = action.payload.statusFilter;
         });
@@ -40,5 +46,6 @@ export {
     addEmployee,
     deleteEmployee,
     updateEmployee,
+    setEmployee,
     changeStatusFilter,
 };

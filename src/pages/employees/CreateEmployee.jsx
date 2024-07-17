@@ -1,6 +1,5 @@
-
 import "./createEmployee.style.css";
-import FormComponent from "../components/FormComponent";
+import FormComponent from "../../components/FormComponent";
 
 const CreateEmployee = () => {
     return (
@@ -12,7 +11,7 @@ const CreateEmployee = () => {
                 <h1>Create Employee</h1>
             </section>
 
-            <FormComponent />
+            <FormComponent  />
         </div>
     );
 };

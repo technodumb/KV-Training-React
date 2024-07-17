@@ -1,26 +1,30 @@
 import "./listEmployee.style.css";
 import { Link } from "react-router-dom";
-import EmployeeListRow from "../components/EmployeeListRow";
-import { useDispatch } from "react-redux";
-import { changeStatusFilter } from "../store/employeeReducer";
-import { useSelector } from "react-redux";
+import EmployeeListRow from "../../components/EmployeeListRow";
+import { useGetEmployeeListQuery } from "./api";
+import { useEffect, useState } from "react";
+import { employeeAttributeMap } from "../../utils/employeeAttributeMap";
 
 const ListEmployee = () => {
-    // const [filter, setFilter] = useState("");
-    const dispatch = useDispatch();
+    const [employees, setEmployees] = useState([]);
+    const [statusFilter, setStatusFilter] = useState("");
     const handleChangeStatusFilter = (e) => {
-        // dispatch({
-        //     type: actionTypes.CHANGE_FILTER,
-        //     payload: e.target.value == "Status" ? "" : e.target.value,
-        // });
-        dispatch(
-            changeStatusFilter({
-                statusFilter: e.target.value == "Status" ? "" : e.target.value,
-            })
-        );
+        const newStatusFilter =
+            e.target.value == "Status" ? "" : e.target.value;
+
+        setStatusFilter(newStatusFilter);
     };
-    const employees = useSelector((state) => state.employees.employees);
-    const statusFilter = useSelector((state) => state.employees.statusFilter);
+    const { data = [], isSuccess } = useGetEmployeeListQuery();
+
+    useEffect(() => {
+        if (isSuccess) {
+            console.log(data);
+            const employees = data.map(employeeAttributeMap);
+            setEmployees(employees);
+        }
+    }, [isSuccess, data]);
+
+    console.log(data);
     return (
         <div className="main-body listEmployee-main-body">
             <section className="employee-section listEmployee-heading ">

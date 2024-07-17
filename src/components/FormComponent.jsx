@@ -3,20 +3,45 @@ import Button from "./Button";
 import FormSelectItem from "./FormSelectItem";
 import FormTextItem from "./FormTextItem";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
-import { addEmployee, updateEmployee } from "../store/employeeReducer";
-import { useSelector } from "react-redux";
+import {
+    useAddEmployeeMutation,
+    useDeleteEmployeeMutation,
+    useGetEmployeeDetailsQuery,
+    useUpdateEmployeeMutation,
+} from "../pages/employees/api";
+import {
+    employeeAttributeMap,
+    employeeAttributeReverseMap,
+} from "../utils/employeeAttributeMap";
 
 const FormComponent = ({ emp_id }) => {
-    const employees = useSelector((state) => state.employees.employees);
-    const dispatch = useDispatch();
-    // const emp = [];
+    const emp_id_int = parseInt(emp_id);
+    const {
+        data: getEmployeeData,
+        error: getEmployeeError,
+        isError: getEmployeeIsError,
+        isSuccess: getEmployeeIsSuccess,
+    } = useGetEmployeeDetailsQuery(emp_id);
+    const [
+        addEmployee,
+        { error: addEmployeeError, isError: addEmployeeIsError },
+    ] = useAddEmployeeMutation();
+    const [
+        updateEmployee,
+        { error: updateEmployeeError, isError: updateEmployeeIsError },
+    ] = useUpdateEmployeeMutation();
+
     const fieldProps = [
         {
             label: "Employee Name",
             name: "emp_name",
             placeholder: "Employee Name",
+        },
+
+        {
+            label: "Employee Email",
+            name: "emp_email",
+            placeholder: "Employee Email",
         },
         {
             label: "Employee ID",
@@ -39,13 +64,18 @@ const FormComponent = ({ emp_id }) => {
             name: "emp_role",
             label: "Role",
             placeholder: "Choose Role",
-            options: ["Developer", "Designer", "Dev-Ops", "Tester"],
+            options: ["UI", "UX", "Developer", "HR"],
         },
         {
             name: "emp_status",
             label: "Status",
             placeholder: "Choose Status",
             options: ["Active", "Inactive", "Probation"],
+        },
+        {
+            label: "Employee Age",
+            name: "emp_age",
+            placeholder: "Employee Age",
         },
         {
             name: "emp_exp",
@@ -62,7 +92,7 @@ const FormComponent = ({ emp_id }) => {
 
     const [formData, setFormData] = useState({
         emp_name: "",
-        emp_id: uuidv4(),
+        emp_id: "",
         emp_join: "",
         emp_role: "",
         emp_status: "",
@@ -73,14 +103,17 @@ const FormComponent = ({ emp_id }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (emp_id) {
-            // setFormData(state);
-            const employee = employees.find(
-                (employee) => employee.emp_id === emp_id
-            );
-            setFormData(employee);
+        if (getEmployeeIsSuccess) {
+            setFormData(employeeAttributeMap(getEmployeeData));
         }
-    }, [emp_id, employees]);
+    }, [getEmployeeData, getEmployeeIsSuccess]);
+
+    // useEffect(() => {
+    //     if (!emp_id) {
+    //     }
+    // }, [addError, addIsError, emp_id]);
+
+    // useEffect(() => {}, [updateError, updateIsError]);
 
     const changeFormState = (formField, formFieldValue) => {
         setFormData({ ...formData, [formField]: formFieldValue });
@@ -88,18 +121,24 @@ const FormComponent = ({ emp_id }) => {
 
     const empNameRef = useRef();
 
-    useEffect(() => {
-        // empNameRef.current.focus();
-        console.log(formData);
-    }, [formData]);
-
-    const handleOnSubmit = (e) => {
+    const handleOnSubmit = async (e) => {
         if (emp_id) {
-            dispatch(updateEmployee({ updatedEmployee: formData }));
+            // console.log(emp_id_int);
+            // console.log(employeeAttributeReverseMap(formData));
+            const payload = {
+                emp_id,
+                updated: employeeAttributeReverseMap(formData),
+            };
+            const response = await updateEmployee(payload);
+            console.log(response);
+            // dispatch(updateEmployee({ updatedEmployee: formData }));
         } else {
-            dispatch(addEmployee({ newEmployee: formData }));
+            const response = await addEmployee(
+                employeeAttributeReverseMap(formData)
+            );
+            console.log(response);
         }
-        navigate(-1);
+        navigate("..");
     };
 
     return (

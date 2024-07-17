@@ -1,6 +1,6 @@
 import React from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import "./components.css";
+// import "./components.css";
 
 // eslint-disable-next-line react/display-name
 const FormTextItem = React.forwardRef(
@@ -49,6 +49,7 @@ const FormTextItem = React.forwardRef(
                     ref={ref}
                     disabled={disabled}
                     required
+                    data-testid="test-input-formtextitem"
                 />
                 <label
                     htmlFor={name}

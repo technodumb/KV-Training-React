@@ -4,7 +4,8 @@ import StatusPill from "./StatusPill";
 import { FaPencil, FaRegTrashCan } from "react-icons/fa6";
 import DeleteEmployeeModal from "../modals/deleteEmployeeModal";
 import { useDispatch } from "react-redux";
-import { deleteEmployee } from "../store/employeeReducer";
+import { useDeleteEmployeeMutation } from "../pages/employees/api";
+// import { deleteEmployee } from "../store/employeeReducer";
 
 const EmployeeListRow = ({ emp_id, employee }) => {
     const employeePropertyOrder = [
@@ -17,7 +18,9 @@ const EmployeeListRow = ({ emp_id, employee }) => {
     ];
 
     const [userDelete, setUserDelete] = useState(false);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    const [deleteEmployee, { data, error, isSuccess, isError }] =
+        useDeleteEmployeeMutation();
 
     const navigate = useNavigate();
     return (
@@ -67,11 +70,12 @@ const EmployeeListRow = ({ emp_id, employee }) => {
                     deleteEmployee={() => {
                         console.log("hello");
                         console.log(emp_id);
+                        deleteEmployee(emp_id);
                         // dispatch({
                         //     type: actionTypes.DELETE_EMPLOYEE,
                         //     payload: emp_id,
                         // });
-                        dispatch(deleteEmployee({ emp_id: emp_id }));
+                        // dispatch(deleteEmployee({ emp_id: emp_id }));
                     }}
                     cancel={() => setUserDelete(false)}
                 />

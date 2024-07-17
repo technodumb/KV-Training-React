@@ -1,6 +1,6 @@
 import "./createEmployee.style.css";
 import { useParams } from "react-router-dom";
-import FormComponent from "../components/FormComponent";
+import FormComponent from "../../components/FormComponent";
 
 const EditEmployee = () => {
     const { emp_id } = useParams();

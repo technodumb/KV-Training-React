@@ -8,7 +8,7 @@ const EmployeeLayout = () => {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
-        if (!token || token !== "true") {
+        if (!token) {
             navigate("/");
         }
     }, [navigate, token]);

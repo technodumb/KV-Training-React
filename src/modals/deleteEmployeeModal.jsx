@@ -1,6 +1,7 @@
 import { FaCross, FaXmark } from "react-icons/fa6";
 import Button from "../components/Button";
 import { useRef } from "react";
+import "./modals.css";
 
 const DeleteEmployeeModal = ({
     // employeeList,
