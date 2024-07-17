@@ -4,8 +4,6 @@ import FormSelectItem from "./FormSelectItem";
 import FormTextItem from "./FormTextItem";
 import { useNavigate } from "react-router-dom";
 import {
-    useAddEmployeeMutation,
-    useDeleteEmployeeMutation,
     useGetEmployeeDetailsQuery,
     useUpdateEmployeeMutation,
 } from "../pages/employees/api";
@@ -13,23 +11,18 @@ import {
     employeeAttributeMap,
     employeeAttributeReverseMap,
 } from "../utils/employeeAttributeMap";
+import { useDispatch } from "react-redux";
+import { addError } from "../store/toastReducer";
+import { v4 } from "uuid";
 
-const FormComponent = ({ emp_id }) => {
-    const emp_id_int = parseInt(emp_id);
-    const {
-        data: getEmployeeData,
-        error: getEmployeeError,
-        isError: getEmployeeIsError,
-        isSuccess: getEmployeeIsSuccess,
-    } = useGetEmployeeDetailsQuery(emp_id);
-    const [
-        addEmployee,
-        { error: addEmployeeError, isError: addEmployeeIsError },
-    ] = useAddEmployeeMutation();
-    const [
-        updateEmployee,
-        { error: updateEmployeeError, isError: updateEmployeeIsError },
-    ] = useUpdateEmployeeMutation();
+const FormComponent = ({ employee, submitAction }) => {
+    // const emp_id_int = parseInt(emp_id);
+    // const {
+    //     data: getEmployeeData,
+    //     error: getEmployeeError,
+    //     isError: getEmployeeIsError,
+    //     isSuccess: getEmployeeIsSuccess,
+    // } = useGetEmployeeDetailsQuery(emp_id);
 
     const fieldProps = [
         {
@@ -101,12 +94,13 @@ const FormComponent = ({ emp_id }) => {
     });
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (getEmployeeIsSuccess) {
-            setFormData(employeeAttributeMap(getEmployeeData));
+        if (employee) {
+            setFormData(employeeAttributeMap(employee));
         }
-    }, [getEmployeeData, getEmployeeIsSuccess]);
+    }, [employee]);
 
     // useEffect(() => {
     //     if (!emp_id) {
@@ -122,23 +116,39 @@ const FormComponent = ({ emp_id }) => {
     const empNameRef = useRef();
 
     const handleOnSubmit = async (e) => {
-        if (emp_id) {
-            // console.log(emp_id_int);
-            // console.log(employeeAttributeReverseMap(formData));
-            const payload = {
-                emp_id,
-                updated: employeeAttributeReverseMap(formData),
-            };
-            const response = await updateEmployee(payload);
-            console.log(response);
-            // dispatch(updateEmployee({ updatedEmployee: formData }));
-        } else {
-            const response = await addEmployee(
-                employeeAttributeReverseMap(formData)
-            );
-            console.log(response);
-        }
-        navigate("..");
+        // if (emp_id) {
+        //     // console.log(emp_id_int);
+        //     // console.log(employeeAttributeReverseMap(formData));
+
+        //     const response = await updateEmployee(
+        //         employeeAttributeReverseMap(formData)
+        //     );
+        //     console.log(response);
+        //     // dispatch(updateEmployee({ updatedEmployee: formData }));
+        // } else {
+        //     const response = await addEmployee(
+        //         employeeAttributeReverseMap(formData)
+        //     );
+        //     console.log(response);
+        // }
+        const response = await submitAction(
+            employeeAttributeReverseMap(formData)
+        );
+
+        if (response.error) {
+            console.log(response.error.data);
+            response.error.data.errors.map((error) => {
+                dispatch(
+                    addError({
+                        id: v4(),
+                        status: "error",
+                        active: true,
+                        message: error,
+                    })
+                );
+            });
+            // alert(response.error);
+        } else navigate(-1);
     };
 
     return (
@@ -178,7 +188,7 @@ const FormComponent = ({ emp_id }) => {
                                 }}
                                 disabled={
                                     fieldProp.name == "emp_id"
-                                        ? !emp_id
+                                        ? !employee
                                             ? "hidden"
                                             : "disabled"
                                         : ""
@@ -195,7 +205,7 @@ const FormComponent = ({ emp_id }) => {
                         onClick={handleOnSubmit}
                         type="button"
                     >
-                        {emp_id ? "Update" : "Create"}
+                        {employee ? "Update" : "Create"}
                     </Button>
                     <Button
                         onClick={() => {

@@ -11,16 +11,20 @@ export const employeeAttributeMap = (employee) => ({
     emp_email: employee.email,
 });
 
-export const employeeAttributeReverseMap = (employee) => ({
-    id: parseInt(employee.emp_id),
-    name: employee.emp_name,
-    email: employee.emp_email,
-    age: parseInt(employee.emp_age),
-    joiningDate: new Date(employee.emp_join).toISOString(),
-    department: employee.emp_dept,
-    role: employee.emp_role,
-    status: employee.emp_status,
-    experience: parseInt(employee.emp_exp),
-    address: { line1: employee.emp_addr, pincode: "1" },
-    password: "demoPassword",
-});
+export const employeeAttributeReverseMap = (employee) => {
+    const emp_join = new Date(employee.emp_join);
+    console.log(emp_join);
+    return {
+        id: parseInt(employee.emp_id),
+        name: employee.emp_name,
+        email: employee.emp_email,
+        age: parseInt(employee.emp_age),
+        joiningDate: emp_join != "Invalid Date" ? emp_join.toISOString() : "",
+        department: employee.emp_dept,
+        role: employee.emp_role,
+        status: employee.emp_status,
+        experience: parseInt(employee.emp_exp),
+        address: { line1: employee.emp_addr, pincode: "1" },
+        password: "demoPassword",
+    };
+};

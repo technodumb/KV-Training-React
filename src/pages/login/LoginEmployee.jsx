@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import loginImg from "../../assets/kvLogin.jpeg";
 import logo from "../../assets/kvLogo.png";
@@ -7,18 +7,20 @@ import FormTextItem from "../../components/FormTextItem";
 import "./loginStyle.css";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "./api";
-import Snackbar from "../../modals/customToast";
+import Toast from "../../modals/customToast";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addError } from "../../store/toastReducer";
+import { v4 } from "uuid";
 
 const LoginEmployee = () => {
+    const toastMessages = useSelector((state) => state.toasts.errors);
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [formData, setFormData] = React.useState({
         username: "",
         password: "",
-    });
-    const [toastMessage, setToastMessage] = useState({
-        active: false,
-        status: "",
-        message: "",
     });
 
     const usernameRef = React.useRef();
@@ -38,17 +40,16 @@ const LoginEmployee = () => {
             navigate("/employee");
         }
         if (isError) {
-            console.log(error);
-            setToastMessage({
-                active: true,
-                status: "error",
-                message: error.data.error,
-            });
-            setTimeout(() => {
-                setToastMessage((prev) => ({ ...prev, active: false }));
-            }, 2000);
+            dispatch(
+                addError({
+                    id: v4(),
+                    status: "error",
+                    active: true,
+                    message: error.data.error,
+                })
+            );
         }
-    }, [data, error, isSuccess, isError, navigate]);
+    }, [data, error, dispatch, isError, isSuccess, navigate]);
 
     const handleSubmit = async () => {
         const response = await login({
@@ -60,11 +61,19 @@ const LoginEmployee = () => {
 
     return (
         <>
-            <Snackbar
-                active={toastMessage.active}
-                status={toastMessage.status}
-                message={toastMessage.message}
-            />
+            <div className="toastContainer">
+                {toastMessages && toastMessages.length
+                    ? toastMessages.map((toastMessage) => (
+                          <Toast
+                              key={toastMessage.id}
+                              id={toastMessage.id}
+                              // active={toastMessage.active}
+                              message={toastMessage.message}
+                              status={toastMessage.status}
+                          />
+                      ))
+                    : ""}
+            </div>
             <div className="d-flex">
                 <section className="login-page-img">
                     <div className="login-page-img-container">

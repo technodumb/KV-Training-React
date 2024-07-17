@@ -1,7 +1,12 @@
 import "./createEmployee.style.css";
 import FormComponent from "../../components/FormComponent";
+import { useAddEmployeeMutation } from "./api";
 
 const CreateEmployee = () => {
+    const [
+        addEmployee,
+        { error: addEmployeeError, isError: addEmployeeIsError },
+    ] = useAddEmployeeMutation();
     return (
         <div className="main-body">
             <section
@@ -11,7 +16,7 @@ const CreateEmployee = () => {
                 <h1>Create Employee</h1>
             </section>
 
-            <FormComponent  />
+            <FormComponent submitAction={addEmployee} />
         </div>
     );
 };

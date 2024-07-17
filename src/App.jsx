@@ -9,7 +9,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import NotFound from "./components/NotFound";
-import EmployeeLayout from "./layouts/EmployeeLayout";
+import HomeLayout from "./layouts/HomeLayout";
 import ListEmployee from "./pages/employees/ListEmployee";
 import EditEmployee from "./pages/employees/EditEmployee";
 import DetailsEmployee from "./pages/employees/DetailsEmployee";
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "employee",
-                element: <EmployeeLayout />,
+                element: <HomeLayout />,
 
                 children: [
                     {
@@ -49,6 +49,33 @@ const router = createBrowserRouter([
                     {
                         path: "details/:emp_id",
                         element: <DetailsEmployee />,
+                    },
+                ],
+            },
+            {
+                path: "department",
+                element: <HomeLayout />,
+
+                children: [
+                    {
+                        index: true,
+                        loader: async () => redirect("list"),
+                    },
+                    {
+                        path: "create",
+                        element: <CreateDepartment />,
+                    },
+                    {
+                        path: "list",
+                        element: <ListDepartment />,
+                    },
+                    {
+                        path: "edit/:emp_id",
+                        element: <EditDepartment />,
+                    },
+                    {
+                        path: "details/:emp_id",
+                        element: <DetailsDepartment />,
                     },
                 ],
             },
