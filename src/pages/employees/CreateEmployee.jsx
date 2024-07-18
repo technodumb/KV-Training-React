@@ -3,10 +3,7 @@ import FormComponent from "../../components/FormComponent";
 import { useAddEmployeeMutation } from "./api";
 
 const CreateEmployee = () => {
-    const [
-        addEmployee,
-        { error: addEmployeeError, isError: addEmployeeIsError },
-    ] = useAddEmployeeMutation();
+    const [addEmployee] = useAddEmployeeMutation();
     return (
         <div className="main-body">
             <section

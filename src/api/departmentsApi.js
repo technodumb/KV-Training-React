@@ -16,7 +16,7 @@ const departmentBaseApi = createApi({
 });
 
 const departmentApiWithTag = departmentBaseApi.enhanceEndpoints({
-    addTagTypes: ["DEPARTMENTS_LIST", "DEPARTMENTS_DETAILS"],
+    addTagTypes: ["DEPARTMENT_LIST", "DEPARTMENT_DETAILS"],
 });
 
 export { departmentApiWithTag as default, departmentBaseApi };

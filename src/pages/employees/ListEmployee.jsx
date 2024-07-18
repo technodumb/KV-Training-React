@@ -4,6 +4,7 @@ import EmployeeListRow from "../../components/EmployeeListRow";
 import { useGetEmployeeListQuery } from "./api";
 import { useEffect, useState } from "react";
 import { employeeAttributeMap } from "../../utils/employeeAttributeMap";
+import LoaderIndicator from "../../components/Loader";
 
 const ListEmployee = () => {
     const [employees, setEmployees] = useState([]);
@@ -69,23 +70,27 @@ const ListEmployee = () => {
                         <span>Action</span>
                     </div>
                     {/* </thead> */}
-                    <div className="employeeList-tableBody">
-                        {employees.map((employee) => {
-                            if (
-                                statusFilter != "" &&
-                                employee.emp_status != statusFilter
-                            )
-                                return;
+                    {!isSuccess ? (
+                        <LoaderIndicator />
+                    ) : (
+                        <div className="employeeList-tableBody">
+                            {employees.map((employee) => {
+                                if (
+                                    statusFilter != "" &&
+                                    employee.emp_status != statusFilter
+                                )
+                                    return;
 
-                            return (
-                                <EmployeeListRow
-                                    key={employee.emp_id}
-                                    emp_id={employee.emp_id}
-                                    employee={employee}
-                                />
-                            );
-                        })}
-                    </div>
+                                return (
+                                    <EmployeeListRow
+                                        key={employee.emp_id}
+                                        emp_id={employee.emp_id}
+                                        employee={employee}
+                                    />
+                                );
+                            })}
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

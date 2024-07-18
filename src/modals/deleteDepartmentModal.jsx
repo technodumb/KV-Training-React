@@ -3,10 +3,10 @@ import Button from "../components/Button";
 import { useRef } from "react";
 import "./modals.css";
 
-const DeleteEmployeeModal = ({
+const DeleteDepartmentModal = ({
     // employeeList,
     // setEmployeeList,
-    deleteEmployee,
+    deleteDepartment,
     cancel,
 }) => {
     const modalBgRef = useRef();
@@ -24,9 +24,9 @@ const DeleteEmployeeModal = ({
             <div className="modal">
                 <FaXmark className="modal-close" onClick={() => cancel()} />
                 <h2>Are you sure?</h2>
-                <span>Do you really want to delete employee?</span>
+                <span>Do you really want to delete department?</span>
                 <span className="modal-buttons">
-                    <Button isPrimary="true" onClick={() => deleteEmployee()}>
+                    <Button isPrimary="true" onClick={() => deleteDepartment()}>
                         Confirm
                     </Button>
                     <Button onClick={() => cancel()}>Cancel</Button>
@@ -36,4 +36,4 @@ const DeleteEmployeeModal = ({
     );
 };
 
-export default DeleteEmployeeModal;
+export default DeleteDepartmentModal;

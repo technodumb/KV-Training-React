@@ -1,4 +1,4 @@
-import "./createEmployee.style.css";
+    import "./createEmployee.style.css";
 import { useParams } from "react-router-dom";
 import FormComponent from "../../components/FormComponent";
 import { useGetEmployeeDetailsQuery, useUpdateEmployeeMutation } from "./api";

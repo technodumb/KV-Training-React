@@ -1,4 +1,4 @@
-import logo from "../assets/kvLogo.png";
+import logo from "../assets/kvLogo.webp";
 import { Outlet, useNavigate } from "react-router-dom";
 import NavElement from "../components/NavElement";
 import { useEffect, useReducer } from "react";
@@ -49,10 +49,6 @@ const HomeLayout = () => {
                         <NavElement
                             navName="List Departments"
                             navLink="../department/list"
-                        />
-                        <NavElement
-                            navName="Create Employee"
-                            navLink="../employee/create"
                         />
                         <NavElement
                             navName="Logout"

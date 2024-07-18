@@ -16,6 +16,7 @@ export const departmentApi = departmentApiWithTag.injectEndpoints({
                 method: "POST",
                 body,
             }),
+            invalidatesTags: ["DEPARTMENT_LIST"],
         }),
         updateDepartment: builder.mutation({
             query: ({ id: dept_id, ...updated }) => ({

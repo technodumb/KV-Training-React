@@ -14,13 +14,6 @@ import { v4 } from "uuid";
 import { useGetDepartmentListQuery } from "../pages/departments/api";
 
 const FormComponent = ({ employee, submitAction }) => {
-    // const emp_id_int = parseInt(emp_id);
-    // const {
-    //     data: getEmployeeData,
-    //     error: getEmployeeError,
-    //     isError: getEmployeeIsError,
-    //     isSuccess: getEmployeeIsSuccess,
-    // } = useGetEmployeeDetailsQuery(emp_id);
     const [departmentNames, setDepartmentNames] = useState([]);
     const { data: getDepartmentData, isSuccess: getDepartmentSuccess } =
         useGetDepartmentListQuery();
@@ -125,21 +118,6 @@ const FormComponent = ({ employee, submitAction }) => {
     const empNameRef = useRef();
 
     const handleOnSubmit = async (e) => {
-        // if (emp_id) {
-        //     // console.log(emp_id_int);
-        //     // console.log(employeeAttributeReverseMap(formData));
-
-        //     const response = await updateEmployee(
-        //         employeeAttributeReverseMap(formData)
-        //     );
-        //     console.log(response);
-        //     // dispatch(updateEmployee({ updatedEmployee: formData }));
-        // } else {
-        //     const response = await addEmployee(
-        //         employeeAttributeReverseMap(formData)
-        //     );
-        //     console.log(response);
-        // }
         const response = await submitAction(
             employeeAttributeReverseMap(formData)
         );
@@ -156,7 +134,6 @@ const FormComponent = ({ employee, submitAction }) => {
                     })
                 );
             });
-            // alert(response.error);
         } else navigate(-1);
     };
 
@@ -165,9 +142,6 @@ const FormComponent = ({ employee, submitAction }) => {
             <form className="form-container">
                 <div className="form-item-container">
                     {fieldProps.map((fieldProp) => {
-                        {
-                            /* if () return; */
-                        }
                         return fieldProp.options ? (
                             <FormSelectItem
                                 name={fieldProp.name}

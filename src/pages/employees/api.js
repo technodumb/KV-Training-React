@@ -16,6 +16,7 @@ export const employeeApi = apiWithTag.injectEndpoints({
                 method: "POST",
                 body,
             }),
+            invalidatesTags: ["EMPLOYEE_LIST", "EMPLOYEE_DETAILS"],
         }),
         updateEmployee: builder.mutation({
             query: ({ id: emp_id, ...updated }) => ({

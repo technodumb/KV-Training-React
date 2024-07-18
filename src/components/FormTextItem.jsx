@@ -53,7 +53,9 @@ const FormTextItem = React.forwardRef(
                 />
                 <label
                     htmlFor={name}
-                    className={isModernLabel ? "modernLabel-label" : undefined}
+                    className={
+                        isModernLabel ? "modernLabel-label" : "formtextlabel"
+                    }
                 >
                     {label}
                 </label>
