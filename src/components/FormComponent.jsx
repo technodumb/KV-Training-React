@@ -3,10 +3,7 @@ import Button from "./Button";
 import FormSelectItem from "./FormSelectItem";
 import FormTextItem from "./FormTextItem";
 import { useNavigate } from "react-router-dom";
-import {
-    useGetEmployeeDetailsQuery,
-    useUpdateEmployeeMutation,
-} from "../pages/employees/api";
+
 import {
     employeeAttributeMap,
     employeeAttributeReverseMap,
@@ -14,6 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addError } from "../store/toastReducer";
 import { v4 } from "uuid";
+import { useGetDepartmentListQuery } from "../pages/departments/api";
 
 const FormComponent = ({ employee, submitAction }) => {
     // const emp_id_int = parseInt(emp_id);
@@ -23,6 +21,9 @@ const FormComponent = ({ employee, submitAction }) => {
     //     isError: getEmployeeIsError,
     //     isSuccess: getEmployeeIsSuccess,
     // } = useGetEmployeeDetailsQuery(emp_id);
+    const [departmentNames, setDepartmentNames] = useState([]);
+    const { data: getDepartmentData, isSuccess: getDepartmentSuccess } =
+        useGetDepartmentListQuery();
 
     const fieldProps = [
         {
@@ -51,7 +52,7 @@ const FormComponent = ({ employee, submitAction }) => {
             name: "emp_dept",
             label: "Department",
             placeholder: "Choose Department",
-            options: ["HR", "Engineering", "Security"],
+            options: departmentNames,
         },
         {
             name: "emp_role",
@@ -101,6 +102,14 @@ const FormComponent = ({ employee, submitAction }) => {
             setFormData(employeeAttributeMap(employee));
         }
     }, [employee]);
+
+    useEffect(() => {
+        if (getDepartmentSuccess) {
+            setDepartmentNames(
+                getDepartmentData.map((department) => department.name)
+            );
+        }
+    }, [getDepartmentData, getDepartmentSuccess]);
 
     // useEffect(() => {
     //     if (!emp_id) {

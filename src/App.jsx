@@ -15,6 +15,8 @@ import EditEmployee from "./pages/employees/EditEmployee";
 import DetailsEmployee from "./pages/employees/DetailsEmployee";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import ListDepartment from "./pages/departments/ListDepartment";
+import DetailsDepartment from "./pages/departments/DetailsDepartment";
 
 const router = createBrowserRouter([
     {
@@ -61,20 +63,20 @@ const router = createBrowserRouter([
                         index: true,
                         loader: async () => redirect("list"),
                     },
-                    {
-                        path: "create",
-                        element: <CreateDepartment />,
-                    },
+                    // {
+                    //     path: "create",
+                    //     element: <CreateDepartment />,
+                    // },
                     {
                         path: "list",
                         element: <ListDepartment />,
                     },
+                    // {
+                    //     path: "edit/:emp_id",
+                    //     element: <EditDepartment />,
+                    // },
                     {
-                        path: "edit/:emp_id",
-                        element: <EditDepartment />,
-                    },
-                    {
-                        path: "details/:emp_id",
+                        path: "details/:dept_id",
                         element: <DetailsDepartment />,
                     },
                 ],

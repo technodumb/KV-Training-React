@@ -1,15 +1,18 @@
-export const employeeAttributeMap = (employee) => ({
-    emp_id: employee.id,
-    emp_name: employee.name,
-    emp_join: new Date(employee.joiningDate).toISOString().substring(0, 10),
-    emp_dept: employee.department.name,
-    emp_role: employee.role,
-    emp_status: employee.status,
-    emp_exp: employee.experience,
-    emp_addr: employee.address.line1,
-    emp_age: employee.age,
-    emp_email: employee.email,
-});
+export const employeeAttributeMap = (employee, dept_name) => {
+    console.log(employee);
+    return {
+        emp_id: employee.id,
+        emp_name: employee.name,
+        emp_join: new Date(employee.joiningDate).toISOString().substring(0, 10),
+        emp_dept: dept_name ? dept_name : employee.department.name,
+        emp_role: employee.role,
+        emp_status: employee.status,
+        emp_exp: employee.experience,
+        emp_addr: employee.address?.line1,
+        emp_age: employee.age,
+        emp_email: employee.email,
+    };
+};
 
 export const employeeAttributeReverseMap = (employee) => {
     const emp_join = new Date(employee.emp_join);

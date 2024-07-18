@@ -42,10 +42,17 @@ const HomeLayout = () => {
             <main className="createEmployee-main">
                 <aside className="sidebar">
                     <nav className="sidebar-nav">
-                        <NavElement navName="List Employees" navLink="list" />
+                        <NavElement
+                            navName="List Employees"
+                            navLink="../employee/list"
+                        />
+                        <NavElement
+                            navName="List Departments"
+                            navLink="../department/list"
+                        />
                         <NavElement
                             navName="Create Employee"
-                            navLink="create"
+                            navLink="../employee/create"
                         />
                         <NavElement
                             navName="Logout"

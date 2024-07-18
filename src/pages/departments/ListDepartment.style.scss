@@ -1,0 +1,9 @@
+.entityList-row {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-column-gap: 20px;
+    align-items: center;
+    padding: 15px 20px;
+    margin: 10px 0;
+    text-align: left;
+}

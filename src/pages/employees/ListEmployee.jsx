@@ -24,10 +24,9 @@ const ListEmployee = () => {
         }
     }, [isSuccess, data]);
 
-
     console.log(data);
     return (
-        <div className="main-body listEmployee-main-body">
+        <div className="main-body listEntity-main-body">
             <section className="employee-section listEmployee-heading ">
                 <h1>Employee list</h1>
                 <div className="employee-filter">
